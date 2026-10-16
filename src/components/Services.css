@@ -1,0 +1,303 @@
+.svc-grid {
+  display: grid;
+  gap: 14px;
+}
+
+/* --- Card ---------------------------------------------------------------- */
+.svc {
+  --mx: 50%;
+  --my: 0%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: clamp(24px, 2.6vw, 34px);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background:
+    radial-gradient(420px circle at var(--mx) var(--my), rgba(143, 176, 255, 0.07), transparent 60%),
+    linear-gradient(180deg, rgba(18, 26, 52, 0.5), rgba(10, 15, 30, 0.35));
+  overflow: hidden;
+  transition:
+    border-color var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out);
+}
+.svc::before {
+  /* fine top highlight */
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: var(--grad-line);
+  opacity: 0.5;
+}
+.svc:hover {
+  border-color: var(--line-2);
+}
+
+.svc__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.svc__icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--line-2);
+  border-radius: 14px;
+  background: linear-gradient(160deg, rgba(143, 176, 255, 0.14), rgba(169, 139, 255, 0.04));
+  color: var(--blue-2);
+  transition: transform var(--dur-2) var(--ease-spring);
+}
+.svc:hover .svc__icon {
+  transform: rotate(-6deg) scale(1.05);
+}
+.svc__num {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.12em;
+  color: var(--text-3);
+}
+
+.svc__body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+.svc__title {
+  font-size: var(--fs-h3);
+  letter-spacing: -0.02em;
+  max-width: 20ch;
+}
+
+.svc__detail {
+  display: grid;
+  gap: 16px;
+}
+.svc__detail dt {
+  margin-bottom: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.svc__detail dd {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+.svc__detail div:last-child dd {
+  color: var(--text);
+}
+
+.svc__cta {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+/* --- Featured cards with art --------------------------------------------- */
+.svc--featured .svc__body {
+  flex: 0 0 auto;
+}
+.svc--featured .svc__cta {
+  margin-top: 0;
+}
+.svc--featured .svc__art {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex: 1 0 auto;
+  margin-top: 4px;
+}
+.svc__art .sart--code {
+  flex: 1;
+  min-height: 210px;
+}
+.svc__art {
+  position: relative;
+  margin: 4px calc(clamp(24px, 2.6vw, 34px) * -1) calc(clamp(24px, 2.6vw, 34px) * -1);
+  padding: 0 clamp(24px, 2.6vw, 34px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
+
+/* Code art */
+.sart--code {
+  border: 1px solid var(--line-2);
+  border-bottom: 0;
+  border-radius: 14px 14px 0 0;
+  background: rgba(5, 8, 18, 0.8);
+  overflow: hidden;
+}
+.sart__bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+}
+.sart__bar span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+.sart__bar em {
+  margin-left: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-style: normal;
+  color: var(--text-3);
+}
+.sart--code pre {
+  margin: 0;
+  padding: 16px 18px 26px;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: clamp(0.66rem, 0.6rem + 0.25vw, 0.78rem);
+  line-height: 1.85;
+  color: var(--text-2);
+}
+.t-k {
+  color: #b49bff;
+}
+.t-f {
+  color: #8fb0ff;
+}
+.t-s {
+  color: #79e8e2;
+}
+
+/* Neural art */
+.sart--neural {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+  height: auto;
+}
+.sart--neural line {
+  stroke: rgba(157, 185, 255, 0.16);
+  stroke-width: 1;
+}
+.sart--neural line.is-hot {
+  stroke: rgba(121, 232, 226, 0.55);
+  stroke-dasharray: 3 5;
+  animation: hv-dash 8s linear infinite;
+}
+.sart--neural circle {
+  fill: #0a1027;
+  stroke-width: 1.2;
+}
+.sart--neural .n-l0 {
+  stroke: #8fb0ff;
+}
+.sart--neural .n-l1 {
+  stroke: #b49bff;
+}
+.sart--neural .n-l2 {
+  stroke: #79e8e2;
+  fill: rgba(121, 232, 226, 0.15);
+}
+
+/* --- CTA band ------------------------------------------------------------ */
+.svc-cta {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+  padding: clamp(26px, 3vw, 40px);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  background:
+    radial-gradient(500px 220px at 100% 0%, rgba(169, 139, 255, 0.18), transparent 70%),
+    radial-gradient(500px 220px at 0% 100%, rgba(79, 125, 255, 0.16), transparent 70%),
+    var(--surface-solid);
+  overflow: hidden;
+}
+.svc-cta h3 {
+  font-size: var(--fs-h3);
+  margin-bottom: 8px;
+}
+.svc-cta p {
+  max-width: 52ch;
+  color: var(--text-2);
+}
+
+/* --- Layout -------------------------------------------------------------- */
+@media (min-width: 680px) {
+  .svc-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .svc--custom-software,
+  .svc-cta {
+    grid-column: 1 / -1;
+  }
+  .svc--custom-software {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    column-gap: 32px;
+  }
+  .svc--custom-software .svc__top,
+  .svc--custom-software .svc__body {
+    grid-column: 1;
+  }
+  .svc--custom-software .svc__art {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: end;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  .svc-cta {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 1080px) {
+  .svc-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .svc--custom-software {
+    grid-column: span 7;
+    grid-template-columns: 1fr;
+  }
+  .svc--custom-software .svc__art {
+    grid-column: 1;
+    grid-row: auto;
+    margin-left: calc(clamp(24px, 2.6vw, 34px) * -1);
+    padding-left: clamp(24px, 2.6vw, 34px);
+  }
+  .svc--ai-solutions {
+    grid-column: span 5;
+  }
+  .svc--automation,
+  .svc--web-saas,
+  .svc--api-systems {
+    grid-column: span 4;
+  }
+  .svc-cta {
+    grid-column: 1 / -1;
+  }
+}
+.t-c {
+  color: var(--text-3);
+}
+
+/* Tablet: the AI card shares a row with a plain card, so drop its art to keep heights balanced */
+@media (min-width: 680px) and (max-width: 1079px) {
+  .svc--ai-solutions .svc__art {
+    display: none;
+  }
+  .svc--ai-solutions .svc__cta {
+    margin-top: auto;
+  }
+}

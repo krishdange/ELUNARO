@@ -1,0 +1,182 @@
+.hv {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 640px;
+  margin-inline: auto;
+}
+.hv__svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Sphere */
+.hv__sphere {
+  transform-origin: 300px 300px;
+  animation: hv-breathe 9s ease-in-out infinite;
+}
+.hv__grid ellipse,
+.hv__grid line {
+  fill: none;
+  stroke: #9db9ff;
+  stroke-opacity: 0.1;
+  stroke-width: 0.8;
+}
+
+/* Orbits */
+.hv__orbit {
+  fill: none;
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+.hv__orbit.hv-tone--blue {
+  stroke: rgba(157, 185, 255, 0.55);
+  animation: hv-dash 30s linear infinite;
+}
+.hv__orbit.hv-tone--violet {
+  stroke: rgba(180, 155, 255, 0.22);
+}
+.hv__orbit.hv-tone--cyan {
+  stroke: rgba(121, 232, 226, 0.45);
+  animation: hv-dash 40s linear infinite reverse;
+}
+
+.hv-node__core {
+  fill: #fff;
+}
+.hv-node__halo {
+  opacity: 0.35;
+}
+.hv-node__halo.hv-tone--blue {
+  fill: #8fb0ff;
+}
+.hv-node__halo.hv-tone--violet {
+  fill: #b49bff;
+}
+.hv-node__halo.hv-tone--cyan {
+  fill: #79e8e2;
+}
+
+/* Satellite links */
+.hv__link {
+  stroke: rgba(157, 185, 255, 0.22);
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+  animation: hv-dash 6s linear infinite;
+}
+.hv__sat rect {
+  fill: #0a1027;
+  stroke: rgba(157, 185, 255, 0.5);
+  stroke-width: 1;
+}
+.hv__sat circle {
+  fill: #9db9ff;
+}
+
+/* Chips */
+.hv__chip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px 9px 9px;
+  border: 1px solid var(--line-2);
+  border-radius: 14px;
+  background: rgba(10, 15, 32, 0.62);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.8);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  line-height: 1.35;
+  white-space: nowrap;
+  animation: hv-float 7s ease-in-out infinite;
+}
+.hv__chip > span:last-child {
+  display: grid;
+}
+.hv__chip-icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: rgba(143, 176, 255, 0.12);
+  color: var(--blue-2);
+}
+.hv__chip-icon .icon {
+  width: 16px;
+  height: 16px;
+}
+.hv__chip-k {
+  color: var(--text);
+}
+.hv__chip-v {
+  color: var(--text-3);
+}
+.hv__chip-dot {
+  width: 7px;
+  height: 7px;
+  margin-left: 5px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 4px rgba(111, 230, 180, 0.15);
+}
+.hv__chip--a {
+  top: 15%;
+  left: -2%;
+}
+.hv__chip--b {
+  top: 52%;
+  right: 0;
+  animation-delay: -2.5s;
+}
+.hv__chip--c {
+  bottom: 9%;
+  left: 12%;
+  padding: 10px 14px 10px 10px;
+  animation-delay: -4.5s;
+}
+
+@media (max-width: 520px) {
+  .hv__chip {
+    font-size: 0.62rem;
+    padding: 7px 10px 7px 7px;
+  }
+  .hv__chip-icon {
+    width: 24px;
+    height: 24px;
+  }
+  .hv__chip--a {
+    left: 0;
+    top: 8%;
+  }
+  .hv__chip--b {
+    right: 0;
+  }
+}
+
+@keyframes hv-dash {
+  to {
+    stroke-dashoffset: -200;
+  }
+}
+@keyframes hv-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+@keyframes hv-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.012);
+  }
+}

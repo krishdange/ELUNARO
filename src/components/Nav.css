@@ -1,0 +1,214 @@
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  height: var(--nav-h);
+  transition: border-color var(--dur-2) var(--ease-out);
+  border-bottom: 1px solid transparent;
+}
+/*
+ * The glass effect lives on a pseudo-element: a backdrop-filter on the header
+ * itself would become the containing block for the fixed mobile panel.
+ */
+.nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(5, 7, 14, 0.72);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  opacity: 0;
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+.nav--scrolled,
+.nav--open {
+  border-bottom-color: var(--line);
+}
+.nav--scrolled::before,
+.nav--open::before {
+  opacity: 1;
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  gap: 24px;
+}
+
+.nav__brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  border-radius: 8px;
+}
+
+/* Desktop links */
+.nav__links {
+  display: none;
+}
+.nav__links ul {
+  display: flex;
+  gap: 4px;
+  padding: 5px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: rgba(10, 15, 30, 0.45);
+}
+.nav__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: var(--r-pill);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--text-2);
+  transition:
+    color var(--dur-1),
+    background-color var(--dur-2) var(--ease-out);
+}
+.nav__link:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+}
+.nav__link.is-active {
+  color: var(--text);
+  background: rgba(143, 176, 255, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(143, 176, 255, 0.18);
+}
+.nav__link:active {
+  transform: scale(0.97);
+}
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav__cta {
+  display: none;
+}
+
+/* Toggle */
+.nav__toggle {
+  position: relative;
+  display: grid;
+  place-content: center;
+  gap: 6px;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--line-2);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  transition: border-color var(--dur-2), background-color var(--dur-2);
+}
+.nav__toggle:hover {
+  border-color: var(--line-strong);
+  background: rgba(255, 255, 255, 0.06);
+}
+.nav__toggle-bar {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: var(--text);
+  transition: transform var(--dur-2) var(--ease-out);
+}
+.nav--open .nav__toggle-bar:first-child {
+  transform: translateY(3.75px) rotate(45deg);
+}
+.nav--open .nav__toggle-bar:last-child {
+  transform: translateY(-3.75px) rotate(-45deg);
+}
+
+/* Mobile panel */
+.nav__panel {
+  position: fixed;
+  inset: var(--nav-h) 0 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 24px var(--gutter) calc(32px + env(safe-area-inset-bottom));
+  background:
+    radial-gradient(600px 400px at 100% 100%, rgba(79, 125, 255, 0.16), transparent 70%),
+    var(--bg);
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition:
+    opacity var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out),
+    visibility 0s linear var(--dur-2);
+}
+.nav--open .nav__panel {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+.nav__panel-list {
+  display: grid;
+}
+.nav__panel-list li {
+  border-bottom: 1px solid var(--line);
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 400ms var(--ease-out),
+    transform 400ms var(--ease-out);
+  transition-delay: calc(var(--i) * 45ms + 60ms);
+}
+.nav--open .nav__panel-list li {
+  opacity: 1;
+  transform: none;
+}
+.nav__panel-link {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 18px 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 8vw, 2.6rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--text-2);
+  transition: color var(--dur-1);
+}
+.nav__panel-link:hover,
+.nav__panel-link.is-active {
+  color: var(--text);
+}
+.nav__panel-index {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.1em;
+  color: var(--blue-2);
+}
+.nav__panel-foot {
+  display: grid;
+  gap: 14px;
+}
+.nav__panel-foot p {
+  color: var(--text-3);
+  font-size: var(--fs-sm);
+}
+.nav__panel-foot .btn {
+  width: 100%;
+}
+
+@media (min-width: 900px) {
+  .nav__links,
+  .nav__cta {
+    display: flex;
+  }
+  .nav__toggle,
+  .nav__panel {
+    display: none;
+  }
+}

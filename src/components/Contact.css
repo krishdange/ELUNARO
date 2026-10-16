@@ -1,0 +1,128 @@
+.contact {
+  overflow: hidden;
+}
+.contact__glow {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  width: min(1100px, 120vw);
+  aspect-ratio: 2;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(79, 125, 255, 0.14), rgba(169, 139, 255, 0.05) 60%, transparent);
+  pointer-events: none;
+}
+
+.contact__layout {
+  position: relative;
+  display: grid;
+  gap: clamp(40px, 5vw, 64px);
+}
+
+.contact__intro {
+  display: grid;
+  align-content: start;
+  gap: 22px;
+}
+.contact__title {
+  font-size: var(--fs-h2);
+  max-width: 12ch;
+}
+.contact__lede {
+  max-width: 40ch;
+  font-size: var(--fs-lg);
+  color: var(--text-2);
+}
+
+.next-steps {
+  display: grid;
+  gap: 4px;
+  margin-top: 12px;
+  counter-reset: step;
+}
+.next-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+}
+.next-step__num {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--blue-2);
+}
+.next-step__title {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.next-step__body {
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+}
+
+.contact__direct {
+  display: grid;
+  gap: 4px;
+  margin-top: 8px;
+}
+.contact__direct .link-arrow {
+  font-size: var(--fs-md);
+}
+
+@media (min-width: 1000px) {
+  .contact__layout {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    gap: 72px;
+  }
+  .contact__intro {
+    position: sticky;
+    top: calc(var(--nav-h) + 48px);
+    align-self: start;
+  }
+}
+
+/* WhatsApp + direct details */
+.contact__whatsapp {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+  margin-top: 8px;
+}
+.btn--whatsapp {
+  color: #04150c;
+  background: #25d366;
+  box-shadow: 0 10px 30px -12px rgba(37, 211, 102, 0.6);
+}
+.btn--whatsapp:hover {
+  background: #3ae07a;
+}
+.contact__details {
+  display: grid;
+  gap: 8px;
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+}
+.contact__details li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-wrap: anywhere;
+}
+.contact__details .icon {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--blue-2);
+}
+.contact__details a {
+  transition: color var(--dur-1);
+}
+.contact__details a:hover {
+  color: var(--text);
+}

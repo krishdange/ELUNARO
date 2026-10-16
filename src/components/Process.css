@@ -1,0 +1,160 @@
+.process {
+  background:
+    linear-gradient(180deg, transparent, rgba(10, 15, 30, 0.6) 20%, rgba(10, 15, 30, 0.6) 80%, transparent);
+}
+.process::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: var(--grad-line);
+  opacity: 0.35;
+}
+
+.process__layout {
+  display: grid;
+  gap: clamp(48px, 6vw, 80px);
+}
+
+.process__sticky {
+  display: grid;
+  gap: 22px;
+}
+.process__title {
+  font-size: var(--fs-h2);
+  max-width: 14ch;
+}
+.process__lede {
+  max-width: 44ch;
+  font-size: var(--fs-lg);
+  color: var(--text-2);
+}
+.process__note {
+  display: flex;
+  gap: 12px;
+  max-width: 44ch;
+  margin-top: 8px;
+  padding: 16px 18px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-md);
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+}
+.process__note .icon {
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  color: var(--cyan);
+}
+
+/* --- Steps --------------------------------------------------------------- */
+.steps {
+  position: relative;
+  padding-left: 40px;
+}
+.steps__list {
+  display: grid;
+}
+.steps__rail {
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 11px;
+  width: 1px;
+  background: var(--line-2);
+  overflow: hidden;
+}
+.steps__rail-fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--blue-2), var(--violet), var(--cyan));
+  transform-origin: top;
+}
+
+/* Scroll-linked progress where supported (progressive enhancement, no JS) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .steps__rail-fill {
+      animation: rail-fill linear both;
+      animation-timeline: view();
+      animation-range: entry 40% cover 70%;
+    }
+  }
+}
+@keyframes rail-fill {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.step {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  padding: 0 0 clamp(40px, 5vw, 56px);
+}
+.step:last-child {
+  padding-bottom: 0;
+}
+.step__marker {
+  position: absolute;
+  top: 6px;
+  left: -40px;
+  display: grid;
+  place-items: center;
+  width: 23px;
+  height: 23px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--bg);
+}
+.step__marker span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--blue-2);
+  box-shadow: 0 0 12px 2px rgba(143, 176, 255, 0.6);
+}
+.step__head {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+}
+.step__num {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--blue-2);
+}
+.step__title {
+  font-size: clamp(1.8rem, 1.3rem + 2vw, 2.8rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+.step__body {
+  max-width: 50ch;
+  font-size: var(--fs-md);
+  color: var(--text-2);
+}
+
+@media (min-width: 960px) {
+  .process__layout {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: start;
+  }
+  .process__sticky {
+    position: sticky;
+    top: calc(var(--nav-h) + 48px);
+  }
+  .steps {
+    padding-left: 64px;
+  }
+  .step__marker {
+    left: -64px;
+  }
+  .step {
+    padding-bottom: 72px;
+  }
+}
